@@ -119,7 +119,7 @@ if(argv["content-base"]) {
 		if(Array.isArray(options.contentBase)){
 			var tempContentBase = [];
 			options.contentBase.forEach(function(contentBase){
-				tempContentBase.push(path.resolve(options.contentBase));
+				tempContentBase.push(path.resolve(contentBase));
 			});
 			options.contentBase = tempContentBase;
 		}
