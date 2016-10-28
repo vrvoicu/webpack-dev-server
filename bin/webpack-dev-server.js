@@ -115,8 +115,17 @@ if(argv["content-base"]) {
 	options.contentBase = argv["content-base"];
 	if(/^[0-9]$/.test(options.contentBase))
 		options.contentBase = +options.contentBase;
-	else if(!/^(https?:)?\/\//.test(options.contentBase))
-		options.contentBase = path.resolve(options.contentBase);
+	else if(!/^(https?:)?\/\//.test(options.contentBase)){
+		if(Array.isArray(options.contentBase)){
+			var tempContentBase = [];
+			options.contentBase.forEach(function(contentBase){
+				tempContentBase.push(path.resolve(options.contentBase));
+			});
+			options.contentBase = tempContentBase;
+		}
+		else
+			options.contentBase = path.resolve(options.contentBase);
+	}
 } else if(argv["content-base-target"]) {
 	options.contentBase = {
 		target: argv["content-base-target"]
